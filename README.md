@@ -152,6 +152,7 @@ The following requests are implemented:
 - getBlockchainTransactions(url: string, params: GetBlockchainTransactionsParams): Promise<GetBlockchainTransactionsResponse>
 - getBundlerRates(url: string, params: GetBundlerRatesParams): Promise<GetBundlerRatesResponse>
 - getTransaction(url: string, params: GetTransactionParams): Promise<GetTransactionResponse>
+- downloadTaggedData(url: string, params: DownloadTaggedDataParams): Promise<DownloadTaggedDataResponse>
 ````
 
 #### transaction post requests

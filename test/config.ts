@@ -70,8 +70,15 @@ const config = {
         }
     },
     transaction: {
-        fullHash: "f0ff38e32214bcedd6c08e7a688defa1d632ae3139764423f8d26b91c949e61d",
-        message: "module-test-1582036400563"
+        message: {
+            fullHash: "f0ff38e32214bcedd6c08e7a688defa1d632ae3139764423f8d26b91c949e61d",
+            message: "module-test-1582036400563"
+        },
+        taggedData: {
+            fullHash: "41ea1258ea9c552f7aa415fe68739cb54e16aa058090090cf60944e0791269d0",
+            content: "module-test-1596986945",
+            name: "module-test"
+        }
     }
 };
 

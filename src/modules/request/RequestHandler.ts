@@ -1,7 +1,8 @@
-import { BroadcastTransactionParams, BroadcastTransactionResponse, DecodeTokenParams, DecodeTokenResponse, DeleteAccountPropertyParams, DeleteAccountPropertyResponse, GetAccountPropertiesParams, GetAccountPropertiesResponse, GetBalanceParams, GetBalanceResponse, GetBlockchainTransactionsParams, GetBlockchainTransactionsResponse, GetBundlerRatesParams, GetBundlerRatesResponse, GetTransactionParams, GetTransactionResponse, IRequest, SendMessageParams, SendMessageResponse, SendMoneyParams, SendMoneyResponse, SetAccountPropertyParams, SetAccountPropertyResponse, UploadTaggedDataParams, UploadTaggedDataResponse } from "../../types";
+import { BroadcastTransactionParams, BroadcastTransactionResponse, DecodeTokenParams, DecodeTokenResponse, DeleteAccountPropertyParams, DeleteAccountPropertyResponse, DownloadTaggedDataParams, DownloadTaggedDataResponse, GetAccountPropertiesParams, GetAccountPropertiesResponse, GetBalanceParams, GetBalanceResponse, GetBlockchainTransactionsParams, GetBlockchainTransactionsResponse, GetBundlerRatesParams, GetBundlerRatesResponse, GetTransactionParams, GetTransactionResponse, IRequest, SendMessageParams, SendMessageResponse, SendMoneyParams, SendMoneyResponse, SetAccountPropertyParams, SetAccountPropertyResponse, UploadTaggedDataParams, UploadTaggedDataResponse } from "../../types";
 import BroadcastController from "./controllers/BroadcastController";
 import DecodeTokenController from "./controllers/DecodeTokenController";
 import DeleteAccountProperty from "./controllers/DeleteAccountPropertyController";
+import DownloadTaggedDataController from "./controllers/DownloadTaggedDataController";
 import GetAccountPropertiesController from "./controllers/GetAccountPropertiesController";
 import GetBalanceController from "./controllers/GetBalanceController";
 import GetBlockchainTransactionsController from "./controllers/GetBlockchainTransactionsController";
@@ -10,10 +11,10 @@ import GetTransactionController from "./controllers/GetTransactionController";
 import SendMessageController from "./controllers/SendMessageController";
 import SendMoneyController from "./controllers/SendMoneyController";
 import SetAccountPropertyController from "./controllers/SetAccountPropertyController";
+import UploadTaggedDataController from "./controllers/UploadTaggedData";
 import InfoRequestService from "./services/InfoRequestService";
 import TxBroadcastService from "./services/TxBroadcastService";
 import TxRequestService from "./services/TxRequestService";
-import UploadTaggedDataController from "./controllers/UploadTaggedData";
 
 
 export default class RequestHandler implements IRequest {
@@ -87,6 +88,12 @@ export default class RequestHandler implements IRequest {
 
     public async uploadTaggedData(url: string, params: UploadTaggedDataParams): Promise<UploadTaggedDataResponse> {
         const controller = new UploadTaggedDataController(new TxRequestService());
+        return controller.run(url, params);
+    }
+
+
+    public async downloadTaggedData(url: string, params: DownloadTaggedDataParams): Promise<DownloadTaggedDataResponse> {
+        const controller = new DownloadTaggedDataController(new InfoRequestService());
         return controller.run(url, params);
     }
 }

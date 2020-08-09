@@ -354,6 +354,17 @@ export type UploadTaggedDataParams = {
 export type UploadTaggedDataResponse = BroadcastTransactionResponse
 
 
+export type DownloadTaggedDataParams = {
+    chain: ChainId;
+    fullHash: string;
+    retrieve?: boolean;
+    requireBlock?: number;
+    requireLastBlock?: number;
+    [name: string]: secureAny;
+}
+
+export type DownloadTaggedDataResponse = string;
+
 export interface IRequest {
     broadcastTransaction(url: string, params: BroadcastTransactionParams): Promise<BroadcastTransactionResponse>;
     decodeToken(url: string, params: DecodeTokenParams): Promise<DecodeTokenResponse>;
@@ -367,6 +378,7 @@ export interface IRequest {
     sendMoney(url: string, params: SendMoneyParams): Promise<SendMoneyResponse>;
     setAccountProperty(url: string, params: SetAccountPropertyParams): Promise<SetAccountPropertyResponse>;
     uploadTaggedData(url: string, params: UploadTaggedDataParams): Promise<UploadTaggedDataResponse>;
+    downloadTaggedData(url: string, params: DownloadTaggedDataParams): Promise<DownloadTaggedDataResponse>;
 }
 
 

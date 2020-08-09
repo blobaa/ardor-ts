@@ -1,4 +1,4 @@
-import { ChainId, ChildTransactionSubtype, ChildTransactionType, DeleteAccountPropertyParams, ErrorResponse, GetBlockchainTransactionsParams, request, SendMessageParams, SendMoneyParams, SetAccountPropertyParams, UploadTaggedDataParams } from "../../src/index";
+import { ChainId, ChildTransactionSubtype, ChildTransactionType, DeleteAccountPropertyParams, ErrorResponse, request, SendMessageParams, SendMoneyParams, SetAccountPropertyParams, UploadTaggedDataParams } from "../../src/index";
 import config from "../config";
 
 
@@ -11,7 +11,10 @@ if (runGetRequests) {
     describe("Information request tests", () => {
 
         test("getBalance success", async () => {
-            const response = await request.getBalance(config.node.url.testnet, { chain: ChainId.IGNIS, account: config.account.alice.address });
+            const response = await request.getBalance(config.node.url.testnet, {
+                chain: ChainId.IGNIS,
+                account: config.account.alice.address
+            });
 
             expect(response.balanceNQT).toBeDefined();
             expect(response.unconfirmedBalanceNQT).toBeDefined();
@@ -20,7 +23,10 @@ if (runGetRequests) {
 
 
         test("getBalance success with own instance", async () => {
-            const response = await request.getBalance(config.node.url.testnet, { chain: ChainId.IGNIS, account: config.account.alice.address });
+            const response = await request.getBalance(config.node.url.testnet, {
+                chain: ChainId.IGNIS,
+                account: config.account.alice.address
+            });
 
             expect(response.balanceNQT).toBeDefined();
             expect(response.unconfirmedBalanceNQT).toBeDefined();
@@ -30,7 +36,11 @@ if (runGetRequests) {
 
         test("getBalance response error", async () => {
             try {
-                await request.getBalance(config.node.url.testnet, { chain: ChainId.IGNIS, account: config.account.alice.address + "bb" });
+                await request.getBalance(config.node.url.testnet, {
+                    chain: ChainId.IGNIS,
+                    account: config.account.alice.address + "bb"
+                });
+
                 fail("should not reach here");
             } catch (e) {
                 const error = e as ErrorResponse;
@@ -42,7 +52,11 @@ if (runGetRequests) {
 
         test("getBalance request fail", async () => {
             try {
-                await request.getBalance(config.node.url.testnet + "__", { chain: ChainId.IGNIS, account: config.account.alice.address });
+                await request.getBalance(config.node.url.testnet + "__", {
+                    chain: ChainId.IGNIS,
+                    account: config.account.alice.address
+                });
+
                 fail("should not reach here");
             } catch (e) {
                 expect(e.isAxiosError).toBeTruthy();
@@ -52,7 +66,10 @@ if (runGetRequests) {
 
         test("decodeToken", async () => {
             const token = config.account.alice.token.testnet;
-            const response = await request.decodeToken(config.node.url.testnet, { data: token.data, token: token.token });
+            const response = await request.decodeToken(config.node.url.testnet, {
+                data: token.data,
+                token: token.token
+            });
 
             expect(response.valid).toBe(true);
             expect(response.accountRS).toBe(config.account.alice.address);
@@ -63,13 +80,11 @@ if (runGetRequests) {
 
 
         test("getBlockchainTransactions", async () => {
-            const params: GetBlockchainTransactionsParams = {
+            const response = await request.getBlockchainTransactions(config.node.url.testnet, {
                 chain: ChainId.IGNIS,
                 account: config.account.alice.address,
                 type: ChildTransactionType.PAYMENT
-            };
-
-            const response = await request.getBlockchainTransactions(config.node.url.testnet, params);
+            });
 
             expect(response.requestProcessingTime).toBeDefined();
             expect(response.transactions[0]).toBeDefined();
@@ -77,7 +92,9 @@ if (runGetRequests) {
 
 
         test("getAccountProperties", async () => {
-            const response = await request.getAccountProperties(config.node.url.testnet, { recipient: config.account.bob.address });
+            const response = await request.getAccountProperties(config.node.url.testnet, {
+                recipient: config.account.bob.address
+            });
 
             expect(response.requestProcessingTime).toBeDefined();
             expect(response.properties).toBeDefined();
@@ -85,12 +102,26 @@ if (runGetRequests) {
 
 
         test("getTransaction", async () => {
-            const response = await request.getTransaction(config.node.url.testnet, { chain: ChainId.IGNIS, fullHash: config.transaction.fullHash });
+            const response = await request.getTransaction(config.node.url.testnet, {
+                chain: ChainId.IGNIS,
+                fullHash: config.transaction.message.fullHash
+            });
 
-            expect(response.fullHash).toBe(config.transaction.fullHash);
+            expect(response.fullHash).toBe(config.transaction.message.fullHash);
             expect(response.type).toBe(ChildTransactionType.MESSAGING);
             expect(response.subtype).toBe(ChildTransactionSubtype.MESSAGING__ARBITRARY_MESSAGE);
-            expect(response.attachment.message).toBe(config.transaction.message);
+            expect(response.attachment.message).toBe(config.transaction.message.message);
+        });
+
+
+        test("downloadTaggedData", async () => {
+            const response = await request.downloadTaggedData(config.node.url.testnet, {
+                chain: ChainId.IGNIS,
+                fullHash: config.transaction.taggedData.fullHash,
+                retrieve: true
+            });
+
+            expect(response).toBe(config.transaction.taggedData.content);
         });
 
     });
