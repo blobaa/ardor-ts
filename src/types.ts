@@ -363,7 +363,7 @@ export type DownloadTaggedDataParams = {
     [name: string]: secureAny;
 }
 
-export type DownloadTaggedDataResponse = string;
+export type DownloadTaggedDataResponse = string | objectAny | number;
 
 export interface IRequest {
     broadcastTransaction(url: string, params: BroadcastTransactionParams): Promise<BroadcastTransactionResponse>;

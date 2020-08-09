@@ -15,6 +15,6 @@ export default class DownloadTaggedDataController {
         params.transactionFullHash = params.fullHash;
         delete params.fullHash;
         const resp = await this.service.run("downloadTaggedData", url, params);
-        return resp as unknown as string;
+        return resp;
     }
 }
