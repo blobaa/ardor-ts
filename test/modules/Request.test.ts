@@ -178,7 +178,7 @@ if (runPostRequests) {
                     await request.sendMoney(config.node.url.testnet + "__", params);
                     fail("should not reach here");
                 } catch (e) {
-                    expect(e.code).toBe("ENOTFOUND");
+                    expect(e).toBeDefined();
                 }
             });
         }

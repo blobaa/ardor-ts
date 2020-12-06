@@ -3,12 +3,12 @@ const config = {
         requestModule: {
             getInformationRequests: true,
             postTransactionRequests: {
-                runTests: true,
-                sendMoney: false,
-                setAccountProperty: false,
-                deleteAccountProperty: false,
-                sendMessage: false,
-                uploadTaggedData: false
+                runTests: false,
+                sendMoney: true,
+                setAccountProperty: true,
+                deleteAccountProperty: true,
+                sendMessage: true,
+                uploadTaggedData: true
             }
         },
         passphraseModule: true,
