@@ -1,4 +1,4 @@
-import ardorjs from "ardorjs";
+import ardorjs from "@atz3n/ardorjs";
 import { ITxSignatureService } from "../../internal-types";
 
 

@@ -1,1 +1,1 @@
-declare module "ardorjs";
+declare module "@atz3n/ardorjs";

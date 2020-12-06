@@ -1,4 +1,4 @@
-import * as ardorjs from "ardorjs";
+import * as ardorjs from "@atz3n/ardorjs";
 import { IAccountConversionService } from "../../internal-types";
 
 
