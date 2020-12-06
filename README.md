@@ -3,40 +3,11 @@
 An [Ardor](https://ardorplatform.org) client library written in [TypeScript](https://www.typescriptlang.org).
 
 
-
 ## Installation
 
-This library is published on GitHub's and npmjs's npm registry.
-
-
-### Npmjs Registry
-
 ````
 npm install @blobaa/ardor-ts
 ````
-
-See [npmjs package](https://www.npmjs.com/package/@blobaa/ardor-ts).
-
-
-### Github Registry
-
-For using GitHub's registry, create a *.npmrc* file in the same directory as your *package.json* and add the following line 
-
-````
-@blobaa:registry=https://npm.pkg.github.com/blobaa
-```` 
-
-This tells npm to use the GitHub registry for @blobaa scoped packages. More information about multiple registry usage can be found in [this medium post](https://medium.com/@crysfel/using-different-registries-in-yarn-and-npm-766541d6f851).
-
-You can now install the package via
-
-````
-npm install @blobaa/ardor-ts
-````
-
-See [GitHub package](https://github.com/blobaa/ardor-ts/packages/129759).
-
-CAUTION: You need to [authenticate yourself](https://github.community/t5/GitHub-API-Development-and/Download-from-Github-Package-Registry-without-authentication/td-p/35255) to use the GitHub registry, even if it's a public available package.
 
 
 ## Development
