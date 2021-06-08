@@ -5,3 +5,5 @@ dist/test/
 .github/
 jest.config.js
 tsconfig.json
+.eslintignore
+.eslintrc.json
